@@ -86,6 +86,33 @@ void listarNodo(TLista lista){
 }
 
 
+nodo * buscar(TLista &lista, int n){
+	struct nodo *p;
+	p = lista;
+	if(p == NULL){
+		cout << "LA lista no tiene datos" << endl;
+	}
+	else{
+		while(p->siguiente != NULL || p->siguiente == NULL){
+			if(p->dato == n){
+				return p;
+			}
+			else if(p->siguiente == NULL){
+				return NULL;		
+			}
+			p = p->siguiente;	
+		}
+	}
+	return NULL;
+}
+
+void sustituir(TLista & lista, int orig,int nuevo){
+	struct nodo * pos;
+	pos = buscar(lista,orig);
+	if(pos != NULL || pos == NULL){
+		pos->dato = nuevo;
+	}
+}
 
 int main(){
 	TLista lista = NULL;
@@ -97,8 +124,16 @@ int main(){
 	addNodo(lista,1);
 	listarNodo(lista);
 
-	deletePosicionNodo(lista,2);
+	//deletePosicionNodo(lista,2);
 
 	listarNodo(lista);
+	
+	if(buscar(lista,586) == NULL) cout << "El dato no existe" << endl;
+	else cout << "El dato existe" << endl;
+
+	sustituir(lista,3,7);
+	listarNodo(lista);
+
+
 	return 0;
 }
