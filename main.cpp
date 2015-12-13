@@ -14,6 +14,7 @@ void addNodo(TLista & lista, int dato){
 	nuevo = new (struct nodo);
 	nuevo->dato = dato;
 	nuevo->siguiente = NULL;
+
 	if(lista == NULL){
 		lista = nuevo;	
 	}
@@ -41,6 +42,37 @@ void addNodo(TLista & lista, int dato){
 	}
 }
 
+void deletePrimero(TLista &lista){
+	lista = lista->siguiente;  //Elimina el primer elemento
+}
+
+void deleteUltimo(TLista &lista){
+	struct nodo * anterior,*actual;
+	anterior = lista;
+	actual = lista;
+	
+	while(actual->siguiente != NULL){
+		anterior = actual;
+		actual = actual->siguiente;
+	}
+	anterior->siguiente = NULL;
+}
+
+void deletePosicionNodo(TLista & lista, int p){
+	struct nodo * anterior,*actual;
+	anterior = lista;
+	actual = lista;
+	int dato =0;
+	if(p>0){
+		while(dato != p && actual->siguiente != NULL){
+			anterior = actual;
+			actual = actual->siguiente;
+			dato++;
+		}
+		anterior->siguiente = actual->siguiente;
+	} 
+}
+
 void listarNodo(TLista lista){
 	int i = 0;
 	
@@ -56,9 +88,7 @@ void listarNodo(TLista lista){
 
 
 int main(){
-
 	TLista lista = NULL;
-
 	addNodo(lista,5);
 	addNodo(lista,2);
 	addNodo(lista,3);
@@ -67,6 +97,8 @@ int main(){
 	addNodo(lista,1);
 	listarNodo(lista);
 
+	deletePosicionNodo(lista,2);
+
+	listarNodo(lista);
 	return 0;
 }
-
